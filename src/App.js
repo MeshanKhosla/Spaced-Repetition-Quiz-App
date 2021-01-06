@@ -1,8 +1,12 @@
 import { React, useState} from 'react';
 import QuizLayout from './components/QuizLayout';
-import Timer from './components/Timer';
 import Question from './components/Question'
 import './App.css';
+/*
+    TODO:
+        PQ
+        UI to add TODOs
+*/
 /* 
     Cleanup:
     * Never used setQuestionData
@@ -21,19 +25,7 @@ function App() {
 
     return (
         <div className="App">
-            <div className='timers'>
-                {/* Question timer */}
-                <Timer 
-                    duration={questionTimerDuration} 
-                    key={timerKey} 
-                    isQuestionTimer={true}
-                /> 
-                {/* Quiz timer */}
-                <Timer 
-                    duration={quizTimerDuration} 
-                    isQuestionTimer={false}
-                /> 
-            </div>
+            
 
             <QuizLayout 
                 questionData={questionData}
@@ -44,6 +36,7 @@ function App() {
                 setQuestionTimerDuration={setQuestionTimerDuration}
                 timerKey={timerKey}
                 setTimerKey={setTimerKey}
+                quizTimerDuration={quizTimerDuration}
             />
         </div>
     );

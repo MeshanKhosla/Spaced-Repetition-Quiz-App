@@ -1,5 +1,6 @@
 import { React } from 'react';
 import QuestionOption from './QuestionOption'
+import TimerLayout from './TimerLayout';
 
 const QuizLayout = ({
         questionData, 
@@ -7,6 +8,7 @@ const QuizLayout = ({
         currentQuestionIndex,
         setCurrentQuestionIndex,
         questionTimerDuration, 
+        quizTimerDuration,
         setQuestionTimerDuration,
         timerKey,
         setTimerKey
@@ -18,19 +20,25 @@ const QuizLayout = ({
     const nextQuestion = questionData[(currentQuestionIndex + 1) % questionData.length]
     return (
         <>
-            {/* Initial round of questions */}
+            <TimerLayout 
+                questionTimerDuration={questionTimerDuration}
+                quizTimerDuration={quizTimerDuration}
+                timerKey={timerKey}
+                currentQuestion={currentQuestion}
+                setCurrentQuestionIndex={setCurrentQuestionIndex}
+                setTimerKey={setTimerKey}
+                setQuestionTimerDuration={setQuestionTimerDuration}
+                currentQuestionIndex={currentQuestionIndex}
+                nextQuestion={nextQuestion}
+            />
+            
             {/* {currentQuestionIndex < questionData.length ?  */}
                 <div>
                     <h1>{currentQuestion.text}</h1>
                     {currentQuestion.options.map((option) => {
                         return (
+                            
                             <QuestionOption 
-                                // option={option} 
-                                // currQuestionObj={ [data[currentQuestion]] }
-                                // nextQuestionObj={
-                                //     (currentQuestion < data.length) ?
-                                //     [data[currentQuestion]] : [-1]
-                                // }
                                 option={option}
                                 questionData={questionData}
                                 setQuestionData={setQuestionData} // to change timeAllowed

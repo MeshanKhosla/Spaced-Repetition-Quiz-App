@@ -57,51 +57,43 @@ const handleOnclick = (
     ) => {
     
     if(option === question.answer) {
-        correctAnswer(question, setQuestionData, timeRemaining)
+        question.correctAnswer(timeRemaining)
     } else {
-        incorrectAnswer(question, setQuestionData, timeRemaining)
+        question.incorrectAnswer(timeRemaining)
     }
-    
-    // if (followingQuestion != -1) {
-    //     dispatch(replaceTimer(followingQuestion.timeAllowed));
-    // } else {
-    //     dispatch(replaceTimer(100))
-    // }
-    
-    // dispatch(nextQuestion());
+
     setCurQuestionIndex(questionIndex + 1)
     setTimerKey(Math.random()) // need to replace this with real timerKey
-    // setQuestionTimerDuration(60)
     setQuestionTimerDuration(nextQuestion.timeAllowed)
 }
 
-const correctAnswer = (question, setQuestionData, timeRemaining) => {
-    console.log("Correct")
-    question.points += timeRemaining
-    question.timeAllowed = question.timeAllowed - getChangeTimeAmt(true, timeRemaining)
-}
+// const correctAnswer = (question, timeRemaining) => {
+//     console.log("Correct")
+//     question.points += timeRemaining
+//     question.timeAllowed = question.timeAllowed - getChangeTimeAmt(true, timeRemaining)
+// }
     
-const incorrectAnswer = (question, setQuestionData, timeRemaining) => {
-    console.log("Incorrect")
-    question.points -= timeRemaining
-    question.timeAllowed = question.timeAllowed + getChangeTimeAmt(false, timeRemaining)
-}
+// const incorrectAnswer = (question, timeRemaining) => {
+//     console.log("Incorrect")
+//     question.points -= timeRemaining
+//     question.timeAllowed = question.timeAllowed + getChangeTimeAmt(false, timeRemaining)
+// }
 
-const getChangeTimeAmt = (correctAns, timeRemaining) => {
-    let thresholdOne = 5;
-    let thresholdTwo = 2.5;
-    if (!correctAns) {
-        thresholdOne = 10
-        thresholdTwo = 5;
-    }
+// const getChangeTimeAmt = (correctAns, timeRemaining) => {
+//     let thresholdOne = 5;
+//     let thresholdTwo = 2.5;
+//     if (!correctAns) {
+//         thresholdOne = 10
+//         thresholdTwo = 5;
+//     }
 
-    let distanceToT1 = Math.abs(timeRemaining / 2) - thresholdOne;
-    let distanceToT2 = Math.abs(timeRemaining / 2) - thresholdTwo;
+//     let distanceToT1 = Math.abs(timeRemaining / 2) - thresholdOne;
+//     let distanceToT2 = Math.abs(timeRemaining / 2) - thresholdTwo;
 
-    if (distanceToT1 <= distanceToT2) {
-        return thresholdOne;
-    }
-    return thresholdTwo
-}
+//     if (distanceToT1 <= distanceToT2) {
+//         return thresholdOne;
+//     }
+//     return thresholdTwo
+// }
 
 export default QuestionOption;

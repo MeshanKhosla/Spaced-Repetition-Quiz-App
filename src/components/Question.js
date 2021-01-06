@@ -9,8 +9,33 @@ class Question {
         this.timeAllowed = this.INITIAL_TIME;
     }
     
-    getInitialTime() {
-        return this.INITIAL_TIME;
+    correctAnswer(timeRemaining) {
+        console.log("Correct")
+        this.points += timeRemaining
+        this.timeAllowed = this.timeAllowed - this.getChangeTimeAmt(true, timeRemaining)
+    }
+    
+    incorrectAnswer(timeRemaining)  {
+        console.log("Incorrect")
+        this.points -= timeRemaining
+        this.timeAllowed = this.timeAllowed + this.getChangeTimeAmt(false, timeRemaining)
+    }
+
+    getChangeTimeAmt(correctAns, timeRemaining) {
+        let thresholdOne = 5;
+        let thresholdTwo = 2.5;
+        if (!correctAns) {
+            thresholdOne = 10
+            thresholdTwo = 5;
+        }
+
+        let distanceToT1 = Math.abs(timeRemaining / 2) - thresholdOne;
+        let distanceToT2 = Math.abs(timeRemaining / 2) - thresholdTwo;
+
+        if (distanceToT1 <= distanceToT2) {
+            return thresholdOne;
+        }
+        return thresholdTwo
     }
 }
 export default Question;
