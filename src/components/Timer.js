@@ -1,27 +1,32 @@
 import React from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { useDispatch } from 'react-redux';
-import { nextQuestion, replaceTimer } from '../actions';
+import { updateRemainingTime } from '../actions';
 
-const Timer = (props) => {
-    const dispatch = useDispatch()
+const Timer = ({ duration, key, isQuestionTimer }) => {
+    const dispatch = useDispatch();
     return (
         <>
             <CountdownCircleTimer
-                key={props.key}
+                key={key}
                 isPlaying
-                duration={props.duration}
+                duration={duration}
                 colors={[
                     ['#004777', 0.33],
                     ['#F7B801', 0.33],
                     ['#A30000', 0.33],
                 ]}
-                onComplete={() => {
-                    dispatch(nextQuestion())
-                    dispatch(replaceTimer(15))
-                }}
+                // onComplete={() => {
+                //     // dispatch(nextQuestion())
+                //     // dispatch(replaceTimer(15))
+                // }}
             >
-                {({ remainingTime }) => remainingTime}
+                {({ remainingTime }) => {
+                    if (isQuestionTimer) {
+                        dispatch(updateRemainingTime(remainingTime))
+                    }
+                    return remainingTime
+                }}
             </CountdownCircleTimer>
         </>
     )

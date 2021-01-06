@@ -1,5 +1,3 @@
-// Not currently being used
-
 class Question {
     STARTING_POINTS = 100;
     INITIAL_TIME = 20;
@@ -9,6 +7,10 @@ class Question {
         this.answer = answer;
         this.points = this.STARTING_POINTS;
         this.timeAllowed = this.INITIAL_TIME;
+    }
+    
+    getInitialTime() {
+        return this.INITIAL_TIME;
     }
 }
 export default Question;

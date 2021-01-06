@@ -7,6 +7,13 @@ export const nextQuestion = () => {
 export const replaceTimer = (n) => {
     return {
         type: 'REPLACE',
-        payload: n,
+        payload: n
+    }
+}
+
+export const updateRemainingTime = (n) => {
+    return {
+        type: 'UPDATE',
+        payload: n
     }
 }

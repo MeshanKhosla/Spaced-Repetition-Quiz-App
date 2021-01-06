@@ -1,17 +1,39 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { nextQuestion, replaceTimer } from '../actions';
+import { useSelector } from 'react-redux';
+// import { nextQuestion, replaceTimer } from '../actions';
 
-const QuestionOption = ({ option, currQuestionObj, nextQuestionObj }) => {
-    const dispatch = useDispatch();
-    const currQuestion = currQuestionObj[0];
-    const followingQuestion = nextQuestionObj[0];
-
+const QuestionOption = ({ 
+        option,
+        questionData,
+        setQuestionData,
+        currentQuestion,
+        setQuestionTimerDuration,
+        currentQuestionIndex,
+        setCurrentQuestionIndex,
+        timerKey,
+        setTimerKey,
+        nextQuestion,
+    }) => {
+    // const currQuestion = currQuestionObj[0];
+    // const followingQuestion = nextQuestionObj[0];
+    const timeRemaining = useSelector(state => state.remainingTime);
+    
     return (
         <>
             <button 
                 onClick={() => 
-                    handleOnclick(option, currQuestion, followingQuestion, dispatch)
+                    handleOnclick(
+                        option, // user chosen answer
+                        currentQuestion, 
+                        nextQuestion,
+                        setQuestionData, // to change timeAllowed and points
+                        currentQuestionIndex,
+                        setCurrentQuestionIndex, // to go to next question
+                        setQuestionTimerDuration, // to create new timer
+                        timerKey,
+                        setTimerKey,
+                        timeRemaining
+                    )
                 } 
                 className="questionOption">
                 <h1>{option}</h1>
@@ -21,34 +43,48 @@ const QuestionOption = ({ option, currQuestionObj, nextQuestionObj }) => {
     )
 }
 
-const handleOnclick = (option, currQuestion, followingQuestion, dispatch) => {
-    if(option === currQuestion.answer) {
-        correctAnswer(currQuestion)
+const handleOnclick = (
+        option, 
+        question, 
+        nextQuestion,
+        setQuestionData, 
+        questionIndex, 
+        setCurQuestionIndex, 
+        setQuestionTimerDuration, 
+        timerKey, 
+        setTimerKey,
+        timeRemaining
+    ) => {
+    
+    if(option === question.answer) {
+        correctAnswer(question, setQuestionData, timeRemaining)
     } else {
-        incorrectAnswer(currQuestion)
+        incorrectAnswer(question, setQuestionData, timeRemaining)
     }
     
-    if (followingQuestion != -1) {
-        dispatch(replaceTimer(followingQuestion.timeAllowed));
-    } else {
-        dispatch(replaceTimer(100))
-    }
+    // if (followingQuestion != -1) {
+    //     dispatch(replaceTimer(followingQuestion.timeAllowed));
+    // } else {
+    //     dispatch(replaceTimer(100))
+    // }
     
-    dispatch(nextQuestion());
+    // dispatch(nextQuestion());
+    setCurQuestionIndex(questionIndex + 1)
+    setTimerKey(Math.random()) // need to replace this with real timerKey
+    // setQuestionTimerDuration(60)
+    setQuestionTimerDuration(nextQuestion.timeAllowed)
 }
 
-const correctAnswer = (q) => {
+const correctAnswer = (question, setQuestionData, timeRemaining) => {
     console.log("Correct")
-    let timeRemaining = 5 // Need to get actual time remaining
-    q.points += timeRemaining
-    q.timeAllowed = q.timeAllowed - getChangeTimeAmt(true, timeRemaining)
+    question.points += timeRemaining
+    question.timeAllowed = question.timeAllowed - getChangeTimeAmt(true, timeRemaining)
 }
     
-const incorrectAnswer = (q) => {
+const incorrectAnswer = (question, setQuestionData, timeRemaining) => {
     console.log("Incorrect")
-    let timeRemaining = 14 // Need to get actual time remaining
-    q.points -= timeRemaining
-    q.timeAllowed = q.timeAllowed + getChangeTimeAmt(false, timeRemaining)
+    question.points -= timeRemaining
+    question.timeAllowed = question.timeAllowed + getChangeTimeAmt(false, timeRemaining)
 }
 
 const getChangeTimeAmt = (correctAns, timeRemaining) => {
