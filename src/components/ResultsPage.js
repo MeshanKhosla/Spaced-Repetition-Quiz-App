@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Not being used currently
 const ResultsPage = (props) => {
     return (
         <div>

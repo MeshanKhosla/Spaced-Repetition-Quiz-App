@@ -10,22 +10,9 @@ const QuestionOption = ({ option, currQuestionObj, nextQuestionObj }) => {
     return (
         <>
             <button 
-                onClick={() => {
-                    if(option === currQuestion.answer) {
-                        console.log(currQuestion)
-                        correctAnswer(currQuestion)
-                    } else {
-                        incorrectAnswer(currQuestion)
-                    }
-                    console.log(currQuestion)
-                    if (followingQuestion != -1) {
-                        dispatch(replaceTimer(followingQuestion.timeAllowed));
-                    } else {
-                        dispatch(replaceTimer(69))
-                    }
-                    // dispatch(replaceTimer(nextQuestion.timeAllowed))
-                    dispatch(nextQuestion());
-                }} 
+                onClick={() => 
+                    handleOnclick(option, currQuestion, followingQuestion, dispatch)
+                } 
                 className="questionOption">
                 <h1>{option}</h1>
             </button>
@@ -34,16 +21,32 @@ const QuestionOption = ({ option, currQuestionObj, nextQuestionObj }) => {
     )
 }
 
+const handleOnclick = (option, currQuestion, followingQuestion, dispatch) => {
+    if(option === currQuestion.answer) {
+        correctAnswer(currQuestion)
+    } else {
+        incorrectAnswer(currQuestion)
+    }
+    
+    if (followingQuestion != -1) {
+        dispatch(replaceTimer(followingQuestion.timeAllowed));
+    } else {
+        dispatch(replaceTimer(100))
+    }
+    
+    dispatch(nextQuestion());
+}
+
 const correctAnswer = (q) => {
     console.log("Correct")
-    let timeRemaining = 5
+    let timeRemaining = 5 // Need to get actual time remaining
     q.points += timeRemaining
     q.timeAllowed = q.timeAllowed - getChangeTimeAmt(true, timeRemaining)
 }
     
 const incorrectAnswer = (q) => {
     console.log("Incorrect")
-    let timeRemaining = 14
+    let timeRemaining = 14 // Need to get actual time remaining
     q.points -= timeRemaining
     q.timeAllowed = q.timeAllowed + getChangeTimeAmt(false, timeRemaining)
 }
@@ -63,9 +66,6 @@ const getChangeTimeAmt = (correctAns, timeRemaining) => {
         return thresholdOne;
     }
     return thresholdTwo
-
-    // change_time = Math.min(threshold_1, threshold_2, 
-    //                  key=lambda x: abs((time_remaining / 2) - x))
 }
 
 export default QuestionOption;

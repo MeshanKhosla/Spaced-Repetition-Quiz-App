@@ -1,17 +1,14 @@
-import { React, useState } from 'react';
-// import Question from './Question';
-import { useSelector, useDispatch } from 'react-redux';
+import { React } from 'react';
+import { useSelector } from 'react-redux';
 import QuestionOption from './QuestionOption'
-// import { updateCurrQuestionTime } from '../actions'
 
 const QuizLayout = () => {
     let data = getData();
-
-    // const dispatch = useDispatch()
     let currentQuestion = useSelector(state => state.currentQuestion);
-    currentQuestion = currentQuestion % data.length;
+
     return (
         <>
+            {/* Initial questions */}
             {currentQuestion < data.length ? 
                 <div>
                     <h1>{data[currentQuestion].text}</h1>
@@ -22,13 +19,15 @@ const QuizLayout = () => {
                                 currQuestionObj={ [data[currentQuestion]] }
                                 nextQuestionObj={
                                     (currentQuestion < data.length) ?
-                                    [data[(currentQuestion + 1) % data.length]] : [-1]
+                                    [data[currentQuestion]] : [-1]
                                 }
                             />
                         )
                     })}
                 </div>
             : ''}
+            
+            {/* This is where I'm going to put the Priority Queue part */}
         </>
     )
 }

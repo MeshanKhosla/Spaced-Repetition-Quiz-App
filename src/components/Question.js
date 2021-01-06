@@ -1,3 +1,5 @@
+// Not currently being used
+
 class Question {
     STARTING_POINTS = 100;
     INITIAL_TIME = 20;
