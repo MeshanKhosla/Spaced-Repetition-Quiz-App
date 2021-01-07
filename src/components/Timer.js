@@ -15,6 +15,7 @@ const Timer = (props) => {
         currentQuestionIndex,
         nextQuestion
     } = props;
+    
     const dispatch = useDispatch();
     return (
         <>

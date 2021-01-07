@@ -4,9 +4,75 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #F3F0F1;
+}
+
 .timers {
     display: flex;
+    transform: translateX(15px);
 }
+
 .timers div {
-    margin-right: 50px;
+    margin-right: 15px;
+}
+
+.quiz-layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.question {
+    text-align: center;
+}
+
+.question h1 {
+    width: 400px;
+    margin-bottom: 25px;
+}
+
+.option-btn {
+    width: 400px;
+    height: 50px;
+    background: #f3f0f1;
+    position: relative;
+    background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+    6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: #121426;
+    outline: none;
+}
+
+.option-btn:hover, .Collapsible__trigger:hover {
+    opacity: 0.3;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:active, .Collapsible__trigger:active {
+    opacity: 1;
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+        inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: #3B625A;;
+}
+
+.Collapsible__trigger {
+    padding: 15px;
+    border-style: solid;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+    6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: #121426;
+    outline: none;
 }
