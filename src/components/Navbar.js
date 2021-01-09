@@ -33,7 +33,7 @@ const Navbar = () => {
                     aria-label="menu"
                 ></IconButton>
                 <Typography variant="h6" className={classes.title}>
-                    <Link to="/">Spaced Learning Quiz App</Link>
+                    <Link to="/">Spaced Repitition Quiz App</Link>
                 </Typography>
                 <Button>
                     <Link to="/">Quiz</Link>
