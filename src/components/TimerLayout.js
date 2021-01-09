@@ -1,6 +1,7 @@
 import React from "react";
 import Timer from "./Timer";
 import Collapsible from 'react-collapsible';
+import Trigger from './Trigger';
 
 const TimerLayout = (props) => {
     const {
@@ -18,8 +19,9 @@ const TimerLayout = (props) => {
     return (
         <>
             {/* Question timer */}
+            <div className="timer-wrapper">
             <div className="timers">
-                <Collapsible trigger="Toggle Question Timer" open={true}>
+                <Collapsible trigger={<Trigger text="Toggle Question Timer"/>} open={true}>
                     <Timer
                         duration={questionTimerDuration}
                         key={timerKey}
@@ -34,8 +36,9 @@ const TimerLayout = (props) => {
                 </Collapsible>
                 
                 {/* Quiz timer */}
-                <Collapsible trigger="Toggle Quiz Timer" open={true}>
+                <Collapsible trigger={<Trigger text="Toggle Quiz Timer"/>} open={true}>
                     <Timer
+                        className="quiz-timer"
                         duration={quizTimerDuration}
                         key={"DOES NOT CHANGE"}
                         isQuestionTimer={false}
@@ -47,6 +50,7 @@ const TimerLayout = (props) => {
                         nextQuestion={nextQuestion}
                     />
                 </Collapsible>
+            </div>
             </div>
         </>
     );

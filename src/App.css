@@ -7,14 +7,70 @@
 body {
     background-color: #F3F0F1;
 }
+.MuiToolbar-root {
+    background-color: #F3F0F1;
+}
+.add-questions-alert-container {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.add-questions-alert {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.add-questions-alert button {
+    margin-top: 20px;
+    width: 400px;
+    height: 50px;
+    background: #f3f0f1;
+    position: relative;
+    margin-bottom: 25px;
+    border-radius: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+    6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: #121426;
+    outline: none;
+    color: black;
+}
+.add-questions-alert button a {
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    margin-top: 15px;
+}
+.MuiToolbar-root a, .MuiToolbar-root h6 {
+    color: black;
+    text-decoration: none;
+}
 
 .timers {
     display: flex;
     transform: translateX(15px);
+    align-items: flex-end;
 }
 
-.timers div {
-    margin-right: 15px;
+.quiz-timer {
+    background-color: orange;
+}
+
+.timers div:first-child  {
+    margin-left: 15px;
+}
+
+.timer-wrapper {
+    transform: translateX(-35px);
 }
 
 .quiz-layout {
@@ -24,6 +80,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
 }
 
 .question {
@@ -31,16 +88,18 @@ body {
 }
 
 .question h1 {
-    width: 400px;
+    width: 800px;
     margin-bottom: 25px;
+    padding: 10px; 
+    box-shadow: 0 2px 6px #555;
+    margin-top: 20px;
 }
 
 .option-btn {
-    width: 400px;
+    width: 800px;
     height: 50px;
     background: #f3f0f1;
     position: relative;
-    background: #f3f0f1;
     margin-bottom: 25px;
     border-radius: 32px;
     text-align: center;
@@ -53,7 +112,7 @@ body {
 }
 
 .option-btn:hover, .Collapsible__trigger:hover {
-    opacity: 0.3;
+    opacity: 0.65;
     box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
         6px 6px 10px rgba(0, 0, 0, 0.2);
 }
@@ -65,7 +124,8 @@ body {
     color: #3B625A;;
 }
 
-.Collapsible__trigger {
+.timer-trigger {
+    margin-bottom: 15px;
     padding: 15px;
     border-style: solid;
     border-radius: 32px;
@@ -75,4 +135,145 @@ body {
     6px 6px 10px rgba(0, 0, 0, 0.2);
     color: #121426;
     outline: none;
+    text-align: center;
+}
+
+.results {
+    text-align: center;
+}
+.add-questions-container {
+    height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-questions {
+    max-width: 800px;
+    width: 100%;
+    min-height: 400px;
+    box-shadow: 0 2px 6px #555;
+    margin: 50px auto;
+    padding: 50px;
+}
+.add-questions h1 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+    color: #666;
+}
+.add-questions form {
+    width: 100%;
+    height: 40px;
+    margin: 20px 0;
+    display: flex;
+}
+.add-questions form input, form button {
+    background-color: #F3F0F1;
+    flex: 3;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #555;
+    margin: 0 5px;
+}
+.add-questions form button {
+    flex: 1;
+    background: #555;
+    color: white;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+.add-questions ul li {
+    list-style: none;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.add-questions ul li input, .row input {
+    margin-right: 5px;
+    transform: translateY(1px);
+}
+
+.add-questions ul li button, .row button {
+    border: none;
+    outline: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.add-questions ul li button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.add-questions .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.add-questions .row #delete {
+    background: crimson;
+}
+.add-questions label {
+    cursor: pointer;
+}
+@media (max-width: 400px) {
+    .add-questions {
+        padding: 10px;
+    }
+}
+#editValue {
+    width: 100%;
+    height: 35px;
+    border: none;
+}
+.edit-btn {
+    background-color: #21587F;
+}
+
+.options-btn {
+    background-color: #42AFFD;
+}
+
+.info, .python-code {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    padding: 30px
+}
+
+.info {
+    text-align: center;
+}
+
+.info p {
+    padding-top: 25px;
+}
+
+.python-code {
+    transform: translateY(-80px)
+}
+
+.quizlength-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quizlength-input {
+    border: none;
+    outline: none;
+    background-color: #F3F0F1;
+    width: 210px;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-bottom: 1px solid #555;
 }

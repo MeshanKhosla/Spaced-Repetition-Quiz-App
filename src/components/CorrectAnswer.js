@@ -1,7 +1,8 @@
-import { React, useState } from 'react'
+import { React } from 'react'
 import { useSelector } from 'react-redux';
-import { revertAnswerColor, updateAnswerColor, toggleTimerPlaying, incrementIncorrectAnswerAmt } from "../actions";
-import { store } from "../index";
+import { revertAnswerColor, updateAnswerColor, toggleTimerPlaying, incrementCorrectAnswerAmt } from '../actions';
+import { store } from '../index';
+
 import currentQuestion from '../reducers/currentQuestion';
 
 const QuestionOption = (props) => {
@@ -17,8 +18,8 @@ const QuestionOption = (props) => {
         isCorrect,
     } = props;
     
-    const [answerColor, setAnswerColor] = useState('#f3f0f1')
     const timeRemaining = useSelector(state => state.remainingTime);
+    const answerColor = useSelector(state => state.answerColor);
 
     return (
         <>
@@ -26,7 +27,6 @@ const QuestionOption = (props) => {
             <button style={{backgroundColor: answerColor}}
                 onClick={() => 
                 {
-                    // dispatch(updateAnswerColor())
                     handleOnclick(
                         option,
                         currentQuestion, 
@@ -38,7 +38,6 @@ const QuestionOption = (props) => {
                         setTimerKey,
                         timeRemaining,
                         isCorrect,
-                        setAnswerColor,
                     )
                 }
                 } 
@@ -51,7 +50,6 @@ const QuestionOption = (props) => {
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
-
 const handleOnclick = async (
         option, 
         question, 
@@ -63,18 +61,15 @@ const handleOnclick = async (
         setTimerKey,
         timeRemaining,
         isCorrect,
-        setAnswerColor,
     ) => {
-        
-    question.incorrectAnswer(timeRemaining)
-    setAnswerColor('#ff0000'); // change wrong answer to red
-    store.dispatch(updateAnswerColor()) // change right answer to green
+
+    question.correctAnswer(timeRemaining)
+    store.dispatch(updateAnswerColor()) // Changes answer to green
     store.dispatch(toggleTimerPlaying())
-    store.dispatch(incrementIncorrectAnswerAmt())
-    await delay(1000)   // Wait a second to user can see
-    store.dispatch(revertAnswerColor()) // change right answer back to original
+    store.dispatch(incrementCorrectAnswerAmt())
+    await delay(1000) // delay so user can see if they got the question right
+    store.dispatch(revertAnswerColor()) // Changes answer back to original
     store.dispatch(toggleTimerPlaying())
-    setAnswerColor('#f3f0f1') // change wrong answer back to original
 
     setCurQuestionIndex(questionIndex + 1)
     setTimerKey(Math.random()) // need to replace this with real timerKey

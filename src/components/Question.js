@@ -10,15 +10,19 @@ class Question {
     }
     
     correctAnswer(timeRemaining) {
-        console.log("Correct")
         this.points += timeRemaining
-        this.timeAllowed = this.timeAllowed - this.getChangeTimeAmt(true, timeRemaining)
+        this.timeAllowed = Math.max(
+            5,
+            this.timeAllowed - this.getChangeTimeAmt(true, timeRemaining)
+        )
     }
     
     incorrectAnswer(timeRemaining)  {
-        console.log("Incorrect")
         this.points -= timeRemaining
-        this.timeAllowed = this.timeAllowed + this.getChangeTimeAmt(false, timeRemaining)
+        this.timeAllowed = Math.min(
+            60,
+            this.timeAllowed + this.getChangeTimeAmt(false, timeRemaining)
+        )
     }
 
     getChangeTimeAmt(correctAns, timeRemaining) {
