@@ -86,7 +86,7 @@ const Info = () => {
         <>
             <div className="info">
                 <h3>
-                    The concept of spaced repitition learning is that you see more frequent
+                    The concept of spaced repetition learning is that you see more frequent
                     and more difficult questions more often than easier ones.
                     This is a quiz app implementing that technique.
                 </h3>
