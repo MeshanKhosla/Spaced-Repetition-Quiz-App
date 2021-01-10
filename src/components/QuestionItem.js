@@ -7,6 +7,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import { useAlert } from 'react-alert';
 
 const QuestionItem = ({ question, id, checkComplete, handleEditQuestions }) => {
     const [onEdit, setOnEdit] = useState(false);
@@ -14,6 +15,7 @@ const QuestionItem = ({ question, id, checkComplete, handleEditQuestions }) => {
     const [openOptionsBox, setOpenOptionsBox] = useState(false);
     const [optionsValue, setOptionsValue] = useState("");
     const [questions, setQuestions] = useContext(DataContext);
+    const alert = useAlert();
 
     // Options box logic
     const handleOpenOptionsBox = () => {
@@ -34,6 +36,9 @@ const QuestionItem = ({ question, id, checkComplete, handleEditQuestions }) => {
         })
         setQuestions(newQuestions)
         setOpenOptionsBox(false);
+        alert.success(<div style={{ textTransform: 'initial' }}>
+            Options added!
+        </div>);
     };
 
     const handleOptionsChange = (e) => {
@@ -84,8 +89,10 @@ const QuestionItem = ({ question, id, checkComplete, handleEditQuestions }) => {
                         />
                         {question.text}
                     </label>
-                    <button className="options-btn" onClick={handleOpenOptionsBox}>Options</button>
-                    <button className="edit-btn" onClick={handleOnEdit}>Edit</button>
+                    <div className="adjusting-btns">
+                        <button className="options-btn" onClick={handleOpenOptionsBox}>Options</button>
+                        <button className="edit-btn" onClick={handleOnEdit}>Edit</button>
+                    </div>
                 </li>
 
                 {/* Options box modal */}

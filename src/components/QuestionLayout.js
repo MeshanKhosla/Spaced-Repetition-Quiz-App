@@ -13,7 +13,8 @@ const QuestionLayout = (props) => {
         setTimerKey,
         nextQuestion,
     } = props;
-
+    
+    randomizeArrOrder(currentQuestion.options)
     return (
         <div className="question">
             <h1>{currentQuestion.text}</h1>
@@ -53,4 +54,13 @@ const QuestionLayout = (props) => {
         </div>
     )
 }
+
+const randomizeArrOrder = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * i);
+        const temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+};
 export default QuestionLayout;

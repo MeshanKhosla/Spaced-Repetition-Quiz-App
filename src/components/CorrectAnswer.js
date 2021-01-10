@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { revertAnswerColor, updateAnswerColor, toggleTimerPlaying, incrementCorrectAnswerAmt } from '../actions';
 import { store } from '../index';
 
-import currentQuestion from '../reducers/currentQuestion';
 
 const QuestionOption = (props) => {
     const {
@@ -55,26 +54,27 @@ const handleOnclick = async (
         question, 
         nextQuestion,
         questionIndex, 
-        setCurQuestionIndex, 
+        setCurrentQuestionIndex, 
         setQuestionTimerDuration, 
         timerKey, 
         setTimerKey,
         timeRemaining,
         isCorrect,
     ) => {
-
+    
     question.correctAnswer(timeRemaining)
     store.dispatch(updateAnswerColor()) // Changes answer to green
-    store.dispatch(toggleTimerPlaying())
-    store.dispatch(incrementCorrectAnswerAmt())
-    await delay(1000) // delay so user can see if they got the question right
-    store.dispatch(revertAnswerColor()) // Changes answer back to original
-    store.dispatch(toggleTimerPlaying())
+    store.dispatch(toggleTimerPlaying()) // Pauses timer temporarily
+    store.dispatch(incrementCorrectAnswerAmt()) 
 
-    setCurQuestionIndex(questionIndex + 1)
-    setTimerKey(Math.random()) // need to replace this with real timerKey
-    // console.log(nextQuestion.text, nextQuestion.timeAllowed)
-    setQuestionTimerDuration(nextQuestion.timeAllowed)
+    // Wait a second so user can see if they got the answer correct
+    setTimeout(()=> {
+        setQuestionTimerDuration(nextQuestion.timeAllowed)
+        setCurrentQuestionIndex(questionIndex + 1)
+        setTimerKey(Math.random()) // need to replace this with real timerKey
+        store.dispatch(revertAnswerColor()) // Changes answer back to original
+        store.dispatch(toggleTimerPlaying())
+    }, 1000)
 }
 
 export default QuestionOption;

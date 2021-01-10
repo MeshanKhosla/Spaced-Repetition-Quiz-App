@@ -6,20 +6,17 @@ import Quiz from './pages/Quiz'
 import Info from './pages/Info';
 import './App.css';
 /* 
-    ugghghh
-        Timer is not updating based on the current question
-        Questions are being repeated and nextQuestion is using the previous
-            question.
+        Come up with algorithm reasoning
+        Add alerts to confirm questions
+        Randomize option order on each iteration
         Change margin top of quiz-layout based on the number of options
         Make it so questions with no options are not marked wrong
             redux state: noOptions
-            If it's true, call incorrectAnswer
+            If it's true, don't call incorrectAnswer
 
     Cleanup:
     * real timerKey
     * Move state to redux
-    * change function signature from ({prop1, prop2...}) 
-        to {prop1, prop2...} = props outside of signature
     * Javadocs
 */
 function App() {

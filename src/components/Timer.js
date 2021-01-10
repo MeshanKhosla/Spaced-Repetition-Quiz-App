@@ -19,13 +19,14 @@ const Timer = (props) => {
     
     const dispatch = useDispatch();
     const timerPlaying = useSelector(state => state.timerPlaying)
+    const quizTimer = useSelector(state => state.quizTimer)
 
     return (
         <>
             <CountdownCircleTimer
                 key={key}
                 isPlaying={timerPlaying}
-                duration={duration}
+                duration={isQuestionTimer ? duration : quizTimer}
                 colors={[
                     ["#004777", 0.33],
                     ["#F7B801", 0.33],
@@ -56,18 +57,20 @@ const Timer = (props) => {
     );
 };
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
-const handleComplete = async (question, nextQuestion, idx, setCurQuestionIndex, setTimerKey, setQuestionTimerDuration, dispatch) => {
+// const delay = ms => new Promise(res => setTimeout(res, ms));
+const handleComplete = async (question, nextQuestion, idx, setCurrentQuestionIndex, setTimerKey, setQuestionTimerDuration, dispatch) => {
     question.incorrectAnswer(0);
     store.dispatch(updateAnswerColor()) // change right answer to green
     store.dispatch(toggleTimerPlaying())
     store.dispatch(incrementIncorrectAnswerAmt())
-    await delay(1000)   // Wait a second to user can see
-    store.dispatch(revertAnswerColor()) // change right answer back to original
-    store.dispatch(toggleTimerPlaying())
-    setCurQuestionIndex(idx + 1);
-    setTimerKey(Math.random()); // need to replace this with real timerKey
-    setQuestionTimerDuration(nextQuestion.timeAllowed);
+
+    setTimeout(() => {
+        setQuestionTimerDuration(nextQuestion.timeAllowed);
+        setCurrentQuestionIndex(idx + 1);
+        setTimerKey(Math.random()); // need to replace this with real timerKey
+        store.dispatch(revertAnswerColor()) // change right answer back to original
+        store.dispatch(toggleTimerPlaying())
+    }, 1000)
 };
 
 const endQuiz = () => {

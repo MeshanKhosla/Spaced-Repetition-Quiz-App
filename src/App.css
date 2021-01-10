@@ -19,13 +19,21 @@ body {
     align-items: center;
     text-align: center;
 }
-.add-questions-alert {
+.restart-alert-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.add-questions-alert, .restart-alert {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.add-questions-alert button {
+.add-questions-alert button, .restart-alert button {
     margin-top: 20px;
     width: 400px;
     height: 50px;
@@ -42,7 +50,7 @@ body {
     outline: none;
     color: black;
 }
-.add-questions-alert button a {
+.add-questions-alert button a, .restart-alert button a {
     color: black;
     text-decoration: none;
     display: inline-block;
@@ -139,6 +147,10 @@ body {
 }
 
 .results {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
 }
 .add-questions-container {
@@ -205,7 +217,9 @@ body {
     color: white;
     padding: 5px 10px;
     cursor: pointer;
+    margin-right: 5px;
 }
+
 .add-questions ul li button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -276,4 +290,40 @@ body {
     margin-top: 15px;
     margin-left: 15px;
     border-bottom: 1px solid #555;
+}
+
+.MuiSvgIcon-root {
+    color: #42AFFD;
+}
+
+.modal-btn {
+    border: none;
+    cursor: pointer;
+    outline: 0;
+}
+
+
+.pq-modal {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.help-modal {
+    outline: 0;
+    background-color: white;
+    padding: 50px;
+    width: 400px;
+    height: 200px;
+    box-shadow: -6px -6px 10px rgba(0, 0, 0, 0.8);
+    border: none;
+}
+
+.help-modal a {
+    text-decoration: none;
+    color: black;
 }

@@ -1,19 +1,28 @@
 import { React, useState, useContext } from 'react'
-import { DataContext } from './DataProvider'
+import { DataContext } from './DataProvider';
+import { useAlert } from 'react-alert';
 
 const FormInput = () => {
     const [questions, setQuestions] = useContext(DataContext);
     const [questionText, setQuestionText] = useState('');
+    const alert = useAlert();
 
     const addQuestion = e => {
         let validQuestion = true;
         questions.forEach(q => {
-            if (q.text == questionText) {
+            if (q.text === questionText) {
                 validQuestion = false;
             }
         })
-        if (!validQuestion) { alert("Questions must be different"); return }
         e.preventDefault();
+
+        if (!validQuestion) { 
+            alert.error(<div style={{ textTransform: 'initial' }}>
+                Questions must be different
+            </div>);
+            setQuestionText('');
+            return;
+        }
         setQuestions([...questions, {
             text: questionText,
             complete: false, 

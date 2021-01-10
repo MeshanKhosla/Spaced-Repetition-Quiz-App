@@ -33,8 +33,8 @@ class Question {
             thresholdTwo = 5;
         }
 
-        let distanceToT1 = Math.abs(timeRemaining / 2) - thresholdOne;
-        let distanceToT2 = Math.abs(timeRemaining / 2) - thresholdTwo;
+        let distanceToT1 = Math.abs(timeRemaining / 2 - thresholdOne);
+        let distanceToT2 = Math.abs(timeRemaining / 2 - thresholdTwo);
 
         if (distanceToT1 <= distanceToT2) {
             return thresholdOne;

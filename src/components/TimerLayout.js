@@ -7,7 +7,6 @@ const TimerLayout = (props) => {
     const {
         questionTimerDuration,
         timerKey,
-        quizTimerDuration,
         currentQuestion,
         setCurrentQuestionIndex,
         setTimerKey,
@@ -39,7 +38,6 @@ const TimerLayout = (props) => {
                 <Collapsible trigger={<Trigger text="Toggle Quiz Timer"/>} open={true}>
                     <Timer
                         className="quiz-timer"
-                        duration={quizTimerDuration}
                         key={"DOES NOT CHANGE"}
                         isQuestionTimer={false}
                         currentQuestion={currentQuestion}

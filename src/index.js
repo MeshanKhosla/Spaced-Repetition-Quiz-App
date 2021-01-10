@@ -6,19 +6,31 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import allReducers from './reducers'
 import { Provider } from 'react-redux'
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
 
 export const store = createStore(
     allReducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+// For alerts
+const options = {
+  position: positions.BOTTOM_CENTER,
+  timeout: 2000,
+  offset: '5px',
+  transition: transitions.FADE
+}
+
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-        <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <AlertProvider template={AlertTemplate} {...options}>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </AlertProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

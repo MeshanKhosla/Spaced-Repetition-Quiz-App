@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { revertAnswerColor, updateAnswerColor, toggleTimerPlaying, incrementIncorrectAnswerAmt } from "../actions";
 import { store } from "../index";
 import currentQuestion from '../reducers/currentQuestion';
+import TimerReducer from '../reducers/TimerReducer';
 
 const QuestionOption = (props) => {
     const {
@@ -52,12 +53,12 @@ const QuestionOption = (props) => {
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-const handleOnclick = async (
+const handleOnclick =  (
         option, 
         question, 
         nextQuestion,
         questionIndex, 
-        setCurQuestionIndex, 
+        setCurrentQuestionIndex, 
         setQuestionTimerDuration, 
         timerKey, 
         setTimerKey,
@@ -66,20 +67,21 @@ const handleOnclick = async (
         setAnswerColor,
     ) => {
         
-    question.incorrectAnswer(timeRemaining)
-    setAnswerColor('#ff0000'); // change wrong answer to red
-    store.dispatch(updateAnswerColor()) // change right answer to green
-    store.dispatch(toggleTimerPlaying())
-    store.dispatch(incrementIncorrectAnswerAmt())
-    await delay(1000)   // Wait a second to user can see
-    store.dispatch(revertAnswerColor()) // change right answer back to original
-    store.dispatch(toggleTimerPlaying())
-    setAnswerColor('#f3f0f1') // change wrong answer back to original
+        question.incorrectAnswer(timeRemaining)
+        setAnswerColor('#ff0000'); // change wrong answer to red
+        store.dispatch(updateAnswerColor()) // change right answer to green
+        store.dispatch(toggleTimerPlaying())
+        store.dispatch(incrementIncorrectAnswerAmt())
 
-    setCurQuestionIndex(questionIndex + 1)
-    setTimerKey(Math.random()) // need to replace this with real timerKey
-    // console.log(nextQuestion.text, nextQuestion.timeAllowed)
-    setQuestionTimerDuration(nextQuestion.timeAllowed)
+        // Wait a second so user can see if they got the question right
+        setTimeout(()=> {
+            setQuestionTimerDuration(nextQuestion.timeAllowed)
+            setCurrentQuestionIndex(questionIndex + 1)
+            setTimerKey(Math.random()) // need to replace this with real timerKey
+            store.dispatch(revertAnswerColor()) // change right answer back to original
+            store.dispatch(toggleTimerPlaying())
+            setAnswerColor('#f3f0f1') // change wrong answer back to original
+    }, 1000)
 }
 
 export default QuestionOption;

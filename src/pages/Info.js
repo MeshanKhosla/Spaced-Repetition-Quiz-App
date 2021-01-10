@@ -86,16 +86,16 @@ const Info = () => {
         <>
             <div className="info">
                 <h3>
-                    The concept of spaced repetition learning is that you see more frequent
-                    and more difficult questions more often than easier ones.
+                    The concept of spaced repetition learning is that you see more 
+                    difficult questions more often than easier ones.
                     This is a quiz app implementing that technique.
                 </h3>
                 <p>
                     To do this, I implemented a priority queue system where all
                     questions are given a score of 100 points at the begining.
-                    Then, that score is changed based on how well they performed
-                    on that question previously. This includes whether they got
-                    that question right and how much time they took on the
+                    Then, that score is changed based on how well you performed
+                    on that question previously. This includes whether you got
+                    that question right and how much time you took on the
                     question. The points are changed based on how many seconds
                     are remaining on the timer. The time allowed for the
                     question is also based on the time remaining along with a

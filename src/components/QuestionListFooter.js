@@ -1,10 +1,20 @@
 import { React, useContext, useState } from 'react'
 import { DataContext } from './DataProvider'
+import { Modal, Switch } from '@material-ui/core';
+import HelpIcon from '@material-ui/icons/Help'
+import { Link } from "react-router-dom";
+import { store } from '../index'
+import { toggleUsePqOrder } from '../actions'
+import { useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 
 const QuestionListFooter = () => {
-    const [checkAll, setCheckAll] = useState(false)
-    const [questions, setQuestions] = useContext(DataContext)
-    
+    const [checkAll, setCheckAll] = useState(false);
+    const [questions, setQuestions] = useContext(DataContext);
+    const [showHelpModal, setShowHelpModal] = useState(false);
+    const usePqOrder = useSelector(state => state.pqOrder);
+    const alert = useAlert();
+
     const handleCheckAll = () => {
         const newQuestions = [...questions] 
         newQuestions.forEach(question => {
@@ -13,11 +23,13 @@ const QuestionListFooter = () => {
         setQuestions(newQuestions)
         setCheckAll(!checkAll)
     }
-
+    
     const handleQuizLength = e => {
         let length = Math.abs(e.target.value)
         localStorage.setItem("Quiz length", length)
-        // store.dispatch(updateQuizLength(length))        
+        alert.success(<div style={{ textTransform: 'initial' }}>
+            Quiz length updated to {length} seconds!
+        </div>);
     }
 
     const deleteQuestion = () => {
@@ -30,7 +42,30 @@ const QuestionListFooter = () => {
     const styles = { 
         transform: `translate(${-20}px, ${0}px)` 
     };
-    
+
+    const handleToggleUsePQ = () => {
+        store.dispatch(toggleUsePqOrder(!usePqOrder))
+    }
+
+
+    const handleOpenHelpModal = () => {
+        setShowHelpModal(true)
+    }
+
+    const handleCloseHelpModal = () => {
+        setShowHelpModal(false)
+    }
+
+    const modalText = (
+        <div className="help-modal">
+            <p id="modal-description">
+                Untoggle this if you want all questions to remain in the same order.
+                The time alloted per question will still change depending on the 
+                algorithm described <Link to="/info">here.</Link>
+            </p>
+        </div>
+    )
+
     return (
         <>
             <div className="row">
@@ -52,6 +87,18 @@ const QuestionListFooter = () => {
                     onChange={handleQuizLength}
                 />
             </div>
+            <div className="quizlength-container">
+                <label>Use Priority Queue Ordering</label>
+                <Switch checked={usePqOrder} color='primary' onClick={handleToggleUsePQ} />
+                <button className="modal-btn" onClick={handleOpenHelpModal}><HelpIcon /></button>
+            </div>
+
+                <Modal
+                    className="pq-modal"
+                    open={showHelpModal}
+                    onClose={handleCloseHelpModal}>
+                    {modalText}
+                </Modal>
         </>
     )
 }

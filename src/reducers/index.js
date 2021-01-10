@@ -7,6 +7,8 @@ import timerPlaying from './timerPlaying'
 import showResultsPage from './showResultsPage'
 import correctAnswerAmt from './correctAnswerAmt'
 import incorrectAnswerAmt from './incorrectAnswerAmt'
+import quizTimer from './quizTimer'
+import pqOrder from './pqOrder'
 
 const allReducers = combineReducers({
     currentQuestion: currentQuestion,
@@ -17,5 +19,7 @@ const allReducers = combineReducers({
     showResultsPage: showResultsPage,
     correctAnswerAmt: correctAnswerAmt,
     incorrectAnswerAmt: incorrectAnswerAmt,
+    quizTimer: quizTimer,
+    pqOrder: pqOrder,
 })
 export default allReducers;
