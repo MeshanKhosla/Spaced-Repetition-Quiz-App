@@ -6,13 +6,12 @@ import Quiz from './pages/Quiz'
 import Info from './pages/Info';
 import './App.css';
 /* 
-        Come up with algorithm reasoning
-        Add alerts to confirm questions
-        Randomize option order on each iteration
         Change margin top of quiz-layout based on the number of options
         Make it so questions with no options are not marked wrong
             redux state: noOptions
             If it's true, don't call incorrectAnswer
+        Change width and height on navbar so you can click anywhere in that area
+            instead of just on the text.
 
     Cleanup:
     * real timerKey

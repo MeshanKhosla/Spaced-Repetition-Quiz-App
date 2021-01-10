@@ -9,7 +9,6 @@ const QuestionLayout = (props) => {
         currentQuestion,
         setCurrentQuestionIndex,
         setQuestionTimerDuration,
-        timerKey,
         setTimerKey,
         nextQuestion,
     } = props;
@@ -20,7 +19,7 @@ const QuestionLayout = (props) => {
             <h1>{currentQuestion.text}</h1>
             {currentQuestion.options.length == 0 ? <h3>This question has no options</h3> : 
             <>
-                {currentQuestion.options.map((option) => {
+                {currentQuestion.options.map(option => {
                     return (
                         (option !== currentQuestion.answer ?
                         <QuestionOption
@@ -29,7 +28,6 @@ const QuestionLayout = (props) => {
                             setQuestionTimerDuration={setQuestionTimerDuration} // used to create a new timer
                             currentQuestionIndex={currentQuestionIndex}
                             setCurrentQuestionIndex={setCurrentQuestionIndex}
-                            timerkey={timerKey}
                             setTimerKey={setTimerKey}
                             nextQuestion={nextQuestion}
                             isCorrect={option == currentQuestion.answer}
@@ -40,12 +38,10 @@ const QuestionLayout = (props) => {
                             setQuestionTimerDuration={setQuestionTimerDuration} // used to create a new timer
                             currentQuestionIndex={currentQuestionIndex}
                             setCurrentQuestionIndex={setCurrentQuestionIndex}
-                            timerkey={timerKey}
                             setTimerKey={setTimerKey}
                             nextQuestion={nextQuestion}
                             isCorrect={option == currentQuestion.answer}
                         />
-                        
                         )
                     ); 
                 })}

@@ -25,27 +25,19 @@ const QuizLayout = (props) => {
     let pqCurQuestion = currentQuestion;
     let pqNextQuestion = nextQuestion;
 
-    // Whether or not we should be using PQ based ordering
+    /* Whether or not we should be using PQ based ordering;
+       Gotten from the toggle on Add Questions page
+    */
     let isPqOrdering = useSelector(state => state.pqOrder)
     if (isPqOrdering) {
         let priorityQueue = new PriorityQueue({
             initialValues: questionData,
             comparator: (a, b) => a.points - b.points,
         });
-        pqCurQuestion = priorityQueue.dequeue();
+        pqCurQuestion = priorityQueue.peek();
         pqNextQuestion = priorityQueue.peek();
-        priorityQueue.queue(pqCurQuestion)
     }
 
-    // console.log(pqNextQuestion.timeAllowed)
-    // console.log(pqCurQuestion.timeAllowed)
-    
-
-    // let priorityQueue = [...questionData];
-    // priorityQueue.sort((a, b) => a.points - b.points)
-    // let pqCurQuestion = priorityQueue[0]
-    // let pqNextQuestion = priorityQueue[0];
-    
     if (!showResultsPage) {
         return (
         <>
@@ -67,7 +59,6 @@ const QuizLayout = (props) => {
                     setQuestionTimerDuration={setQuestionTimerDuration}
                     currentQuestionIndex={currentQuestionIndex}
                     setCurrentQuestionIndex={setCurrentQuestionIndex}
-                    timerkey={timerKey}
                     setTimerKey={setTimerKey}
                     nextQuestion={nextQuestion}
                 /> 
@@ -78,7 +69,6 @@ const QuizLayout = (props) => {
                     setQuestionTimerDuration={setQuestionTimerDuration} // used to create a new timer
                     currentQuestionIndex={currentQuestionIndex}
                     setCurrentQuestionIndex={setCurrentQuestionIndex}
-                    timerkey={timerKey}
                     setTimerKey={setTimerKey}
                     nextQuestion={pqNextQuestion}
                 />

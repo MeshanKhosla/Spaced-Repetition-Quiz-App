@@ -10,6 +10,7 @@ import incorrectAnswerAmt from './incorrectAnswerAmt'
 import quizTimer from './quizTimer'
 import pqOrder from './pqOrder'
 
+
 const allReducers = combineReducers({
     currentQuestion: currentQuestion,
     timer: TimerReducer,

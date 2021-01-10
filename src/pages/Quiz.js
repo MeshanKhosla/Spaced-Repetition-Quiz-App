@@ -13,6 +13,7 @@ const Quiz = () => {
     const [timerKey, setTimerKey] = useState(0);
 
     store.dispatch(setQuizTimer(parseInt(localStorage.getItem("Quiz length"))))
+    
     return (
         <>
             {questionData.length > 1 ? (
@@ -58,7 +59,7 @@ const getData = () => {
         questions.push(new Question(q.text, q.options, q.answer));
     });
 
-    // randomizeArrOrder(questions);
+    randomizeArrOrder(questions);
     return questions;
 };
 

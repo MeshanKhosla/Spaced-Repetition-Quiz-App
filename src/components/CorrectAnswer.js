@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { revertAnswerColor, updateAnswerColor, toggleTimerPlaying, incrementCorrectAnswerAmt } from '../actions';
 import { store } from '../index';
 
-
 const QuestionOption = (props) => {
     const {
         option,
@@ -11,7 +10,6 @@ const QuestionOption = (props) => {
         setQuestionTimerDuration,
         currentQuestionIndex,
         setCurrentQuestionIndex,
-        timerKey,
         setTimerKey,
         nextQuestion,
         isCorrect,
@@ -33,7 +31,6 @@ const QuestionOption = (props) => {
                         currentQuestionIndex,
                         setCurrentQuestionIndex, 
                         setQuestionTimerDuration, 
-                        timerKey,
                         setTimerKey,
                         timeRemaining,
                         isCorrect,
@@ -48,7 +45,6 @@ const QuestionOption = (props) => {
     )
 }
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
 const handleOnclick = async (
         option, 
         question, 
@@ -56,12 +52,10 @@ const handleOnclick = async (
         questionIndex, 
         setCurrentQuestionIndex, 
         setQuestionTimerDuration, 
-        timerKey, 
         setTimerKey,
         timeRemaining,
         isCorrect,
-    ) => {
-    
+    ) => {    
     question.correctAnswer(timeRemaining)
     store.dispatch(updateAnswerColor()) // Changes answer to green
     store.dispatch(toggleTimerPlaying()) // Pauses timer temporarily
@@ -69,9 +63,9 @@ const handleOnclick = async (
 
     // Wait a second so user can see if they got the answer correct
     setTimeout(()=> {
-        setQuestionTimerDuration(nextQuestion.timeAllowed)
+        setQuestionTimerDuration(nextQuestion.timeAllowed) // Updates timer
         setCurrentQuestionIndex(questionIndex + 1)
-        setTimerKey(Math.random()) // need to replace this with real timerKey
+        setTimerKey(questionIndex + 1)
         store.dispatch(revertAnswerColor()) // Changes answer back to original
         store.dispatch(toggleTimerPlaying())
     }, 1000)

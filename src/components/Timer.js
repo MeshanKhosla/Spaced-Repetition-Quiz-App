@@ -57,7 +57,6 @@ const Timer = (props) => {
     );
 };
 
-// const delay = ms => new Promise(res => setTimeout(res, ms));
 const handleComplete = async (question, nextQuestion, idx, setCurrentQuestionIndex, setTimerKey, setQuestionTimerDuration, dispatch) => {
     question.incorrectAnswer(0);
     store.dispatch(updateAnswerColor()) // change right answer to green
