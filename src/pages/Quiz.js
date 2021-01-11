@@ -9,10 +9,11 @@ import { Link } from "react-router-dom";
  * If not, Alert user that they need a minimum of 2 questions.
  */
 const Quiz = () => {
+    const [questionData] = useState(getData()); // Dont need setter
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questionTimerDuration, setQuestionTimerDuration] = useState(new Question().INITIAL_TIME);
     const [timerKey, setTimerKey] = useState(0);
-    let questionData = getData();
+    // let questionData = getData();
     
     return (
         <>
@@ -55,7 +56,7 @@ const getData = () => {
         questions.push(new Question(q.text, q.options, q.answer));
     });
     
-    randomizeArrOrder(questions);
+    // randomizeArrOrder(questions);
     return questions;
 };
 
