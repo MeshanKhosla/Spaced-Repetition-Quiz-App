@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
  * If not, Alert user that they need a minimum of 2 questions.
  */
 const Quiz = () => {
-    const [questionData, setQuestionData] = useState(getData());
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questionTimerDuration, setQuestionTimerDuration] = useState(new Question().INITIAL_TIME);
     const [timerKey, setTimerKey] = useState(0);
+    let questionData = getData();
     
     return (
         <>

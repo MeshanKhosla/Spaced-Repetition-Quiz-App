@@ -24,7 +24,7 @@ const QuestionLayout = props => {
     return (
         <div className="question">
             <h1>{currentQuestion.text}</h1>
-            {currentQuestion.options.length == 0 ? <h3>This question has no options</h3> : 
+            {currentQuestion.options.length === 0 ? <h3>This question has no options</h3> : 
             <>
                 {currentQuestion.options.map(option => {
                     return (
