@@ -49,7 +49,7 @@ const Quiz = () => {
  */
 const getData = () => {
     let questions = [];
-    let rawQuestionData = JSON.parse(localStorage.getItem("questionStore"));
+    let rawQuestionData = JSON.parse(localStorage.getItem("questionStore")) || [];
     rawQuestionData.forEach((q) => {
         randomizeArrOrder(q.options);
         questions.push(new Question(q.text, q.options, q.answer));
