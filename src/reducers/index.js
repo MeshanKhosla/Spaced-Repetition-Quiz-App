@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
-import currentQuestion from './currentQuestion'
-import TimerReducer from './TimerReducer'
-import  remainingTime from './remainingTime'
+import remainingTime from './remainingTime'
 import answerColor from './answerColor'
 import timerPlaying from './timerPlaying'
 import showResultsPage from './showResultsPage'
@@ -11,8 +9,6 @@ import pqOrder from './pqOrder'
 
 
 const allReducers = combineReducers({
-    currentQuestion: currentQuestion,
-    timer: TimerReducer,
     remainingTime: remainingTime,
     answerColor: answerColor,
     timerPlaying: timerPlaying,

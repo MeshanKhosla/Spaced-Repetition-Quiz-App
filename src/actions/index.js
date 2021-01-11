@@ -1,16 +1,3 @@
-// export const nextQuestion = () => {
-//     return {
-//         type: 'NEXT_QUESTION'
-//     }
-// }
-
-// export const replaceTimer = (n) => {
-//     return {
-//         type: 'REPLACE',
-//         payload: n
-//     }
-// }
-
 export const updateRemainingTime = n => {
     return {
         type: 'UPDATE',
@@ -59,4 +46,3 @@ export const toggleUsePqOrder = () => {
         type: "TOGGLE_USE_PQ_ORDER"
     }
 }
-
