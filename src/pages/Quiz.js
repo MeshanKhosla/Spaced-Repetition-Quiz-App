@@ -13,7 +13,6 @@ const Quiz = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questionTimerDuration, setQuestionTimerDuration] = useState(new Question().INITIAL_TIME);
     const [timerKey, setTimerKey] = useState(0);
-    // let questionData = getData();
     
     return (
         <>

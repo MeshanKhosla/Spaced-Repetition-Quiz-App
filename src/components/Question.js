@@ -13,10 +13,13 @@ class Question {
         this.answer = answer;
         this.points = this.STARTING_POINTS;
         this.timeAllowed = this.INITIAL_TIME;
+        this.timesCorrect = 0;
+        this.timesIncorrect = 0;
     }
     
     // Updates the points and timeAllowed of the question instance
     correctAnswer(timeRemaining) {
+        this.timesCorrect += 1;
         this.points += timeRemaining
         this.timeAllowed = Math.max(
             5,
@@ -25,6 +28,7 @@ class Question {
     }
     
     incorrectAnswer(timeRemaining)  {
+        this.timesIncorrect += 1;
         this.points -= timeRemaining
         this.timeAllowed = Math.min(
             60,

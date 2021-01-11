@@ -82,7 +82,7 @@ const QuizLayout = props => {
         </>
         )
     } else {
-        return <ResultsPage />
+        return <ResultsPage questionData={questionData}/>
     }
 };
 export default QuizLayout;
