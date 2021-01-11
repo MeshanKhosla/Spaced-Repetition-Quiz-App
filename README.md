@@ -3,3 +3,6 @@
 
 ### [Hosted site](https://spaced-repetition-quiz.netlify.app)
 Information on how this was done can be found [here](https://spaced-repetition-quiz.netlify.app/info)
+
+Flowchart:
+![Flowchart](https://i.imgur.com/sdolGIp.png)
