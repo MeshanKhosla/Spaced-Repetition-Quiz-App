@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 import { revertAnswerColor, updateAnswerColor, toggleTimerPlaying, incrementIncorrectAnswerAmt } from "../actions";
 import { store } from "../index";
 
-const QuestionOption = (props) => {
+/**
+ * Component that creates incorrect options
+ */
+const QuestionOption = props => {
     const {
         option,
         currentQuestion,
@@ -12,7 +15,6 @@ const QuestionOption = (props) => {
         setCurrentQuestionIndex,
         setTimerKey,
         nextQuestion,
-        isCorrect,
     } = props;
     
     const [answerColor, setAnswerColor] = useState('#f3f0f1')
@@ -20,12 +22,10 @@ const QuestionOption = (props) => {
 
     return (
         <>
-            {/* {console.log(currentQuestion.text, currentQuestion.timeAllowed)} */}
-            <button style={{backgroundColor: answerColor}}
+            <button style={{ backgroundColor: answerColor }}
                 onClick={() => 
                 {
                     handleOnclick(
-                        option,
                         currentQuestion, 
                         nextQuestion,
                         currentQuestionIndex,
@@ -33,7 +33,6 @@ const QuestionOption = (props) => {
                         setQuestionTimerDuration, 
                         setTimerKey,
                         timeRemaining,
-                        isCorrect,
                         setAnswerColor,
                     )
                 }
@@ -46,8 +45,8 @@ const QuestionOption = (props) => {
     )
 }
 
+// Logic that handles incorrect question click
 const handleOnclick =  (
-        option, 
         question, 
         nextQuestion,
         questionIndex, 
@@ -55,7 +54,6 @@ const handleOnclick =  (
         setQuestionTimerDuration, 
         setTimerKey,
         timeRemaining,
-        isCorrect,
         setAnswerColor,
     ) => {
 

@@ -2,8 +2,15 @@ import React from 'react';
 import QuestionOption from './QuestionOption';
 import CorrectAnswer from './CorrectAnswer';
 
-
-const QuestionLayout = (props) => {
+/**
+ * Component that maps over question options.
+ * If the option is incorrect, renders QuestionOption.
+ * If the option is correct, renders CorrectOption.
+ * Need to be different components in order to always change
+   correct answer background to green.
+ * Randomizes the options and alerts alerts if question has no options.
+ */
+const QuestionLayout = props => {
     const {
         currentQuestionIndex,
         currentQuestion,
@@ -30,7 +37,6 @@ const QuestionLayout = (props) => {
                             setCurrentQuestionIndex={setCurrentQuestionIndex}
                             setTimerKey={setTimerKey}
                             nextQuestion={nextQuestion}
-                            isCorrect={option == currentQuestion.answer}
                         /> :
                         <CorrectAnswer
                             option={option}
@@ -40,7 +46,6 @@ const QuestionLayout = (props) => {
                             setCurrentQuestionIndex={setCurrentQuestionIndex}
                             setTimerKey={setTimerKey}
                             nextQuestion={nextQuestion}
-                            isCorrect={option == currentQuestion.answer}
                         />
                         )
                     ); 
@@ -51,12 +56,14 @@ const QuestionLayout = (props) => {
     )
 }
 
-const randomizeArrOrder = (arr) => {
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * i);
-        const temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+/**
+ * Implementation of the Durstenfeld shuffle
+ * @param {array} array 
+ */
+const randomizeArrOrder = array => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
 };
 export default QuestionLayout;

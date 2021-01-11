@@ -1,3 +1,9 @@
+/**
+ * Represents a Question.
+ * @param {string} text - The question text.
+ * @param {array} options - The options for the question.
+ * @param {string} answer - The answer for the question.
+ */
 class Question {
     STARTING_POINTS = 100;
     INITIAL_TIME = 20;
@@ -9,6 +15,7 @@ class Question {
         this.timeAllowed = this.INITIAL_TIME;
     }
     
+    // Updates the points and timeAllowed of the question instance
     correctAnswer(timeRemaining) {
         this.points += timeRemaining
         this.timeAllowed = Math.max(

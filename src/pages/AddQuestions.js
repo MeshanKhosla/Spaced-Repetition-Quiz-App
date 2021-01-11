@@ -4,6 +4,9 @@ import QuestionList from '../components/QuestionList';
 import QuestionListFooter from "../components/QuestionListFooter";
 import { DataProvider } from '../components/DataProvider';
 
+/**
+ * Page that allows user to add questions.
+ */
 const AddQuestions = () => {
     return (
         <DataProvider>

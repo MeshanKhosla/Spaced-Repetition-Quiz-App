@@ -8,6 +8,11 @@ import { toggleUsePqOrder } from '../actions'
 import { useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 
+/**
+ * Component that handles logic for deletion, toggle, and quiz length.
+ * Stores quiz length in localstorage.
+ * Stores PQ toggle in Redux.
+ */
 const QuestionListFooter = () => {
     const [checkAll, setCheckAll] = useState(false);
     const [questions, setQuestions] = useContext(DataContext);

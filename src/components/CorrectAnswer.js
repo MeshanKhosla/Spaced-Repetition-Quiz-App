@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 import { revertAnswerColor, updateAnswerColor, toggleTimerPlaying, incrementCorrectAnswerAmt } from '../actions';
 import { store } from '../index';
 
-const QuestionOption = (props) => {
+/**
+ * Component that creates Correct answer option. 
+ */
+const QuestionOption = props => {
     const {
         option,
         currentQuestion,
@@ -12,20 +15,16 @@ const QuestionOption = (props) => {
         setCurrentQuestionIndex,
         setTimerKey,
         nextQuestion,
-        isCorrect,
     } = props;
     
     const timeRemaining = useSelector(state => state.remainingTime);
     const answerColor = useSelector(state => state.answerColor);
-
     return (
         <>
-            {/* {console.log(currentQuestion.text, currentQuestion.timeAllowed)} */}
-            <button style={{backgroundColor: answerColor}}
+            <button style={{ backgroundColor: answerColor }}
                 onClick={() => 
                 {
                     handleOnclick(
-                        option,
                         currentQuestion, 
                         nextQuestion,
                         currentQuestionIndex,
@@ -33,7 +32,6 @@ const QuestionOption = (props) => {
                         setQuestionTimerDuration, 
                         setTimerKey,
                         timeRemaining,
-                        isCorrect,
                     )
                 }
                 } 
@@ -45,8 +43,8 @@ const QuestionOption = (props) => {
     )
 }
 
+// Logic that handles correct answers
 const handleOnclick = async (
-        option, 
         question, 
         nextQuestion,
         questionIndex, 
@@ -54,7 +52,6 @@ const handleOnclick = async (
         setQuestionTimerDuration, 
         setTimerKey,
         timeRemaining,
-        isCorrect,
     ) => {    
     question.correctAnswer(timeRemaining)
     store.dispatch(updateAnswerColor()) // Changes answer to green

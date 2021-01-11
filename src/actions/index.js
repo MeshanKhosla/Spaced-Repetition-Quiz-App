@@ -54,13 +54,6 @@ export const incrementIncorrectAnswerAmt = () => {
     }
 }
 
-export const setQuizTimer = n => {
-    return {
-        type: "SET_QUIZ_TIMER",
-        payload: n,
-    }
-}
-
 export const toggleUsePqOrder = () => {
     return {
         type: "TOGGLE_USE_PQ_ORDER"

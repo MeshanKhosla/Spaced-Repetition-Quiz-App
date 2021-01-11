@@ -1,6 +1,38 @@
 import React from "react";
 import Highlight from "react-highlight.js";
 
+/**
+ * Page that describes algorithm.
+ */
+
+const Info = () => {
+    return (
+        <>
+            <div className="info">
+                <h3>
+                    The concept of spaced repetition learning is that you see more 
+                    difficult questions more often than easier ones.
+                    This is a quiz app implementing that technique.
+                </h3>
+                <p>
+                    To do this, I implemented a priority queue system where all
+                    questions are given a score of 100 points at the begining.
+                    Then, that score is changed based on how well you performed
+                    on that question previously. This includes whether you got
+                    that question right and how much time you took on the
+                    question. The points are changed based on how many seconds
+                    are remaining on the timer. The time allowed for the
+                    question is also based on the time remaining along with a
+                    few thresholds. The question asked is the one with the least
+                    amount of points in the queue.
+                </p>
+                <p>Python code I used to test the concept:</p>
+            </div>
+            <Highlight className="python-code" language={"python"}>{code}</Highlight>
+        </>
+    );
+};
+
 const code = `
 from queue import PriorityQueue
 
@@ -80,33 +112,4 @@ def get_change_time_amt(correct_ans, time_remaining):
 
 alg()
 `;
-
-const Info = () => {
-    return (
-        <>
-            <div className="info">
-                <h3>
-                    The concept of spaced repetition learning is that you see more 
-                    difficult questions more often than easier ones.
-                    This is a quiz app implementing that technique.
-                </h3>
-                <p>
-                    To do this, I implemented a priority queue system where all
-                    questions are given a score of 100 points at the begining.
-                    Then, that score is changed based on how well you performed
-                    on that question previously. This includes whether you got
-                    that question right and how much time you took on the
-                    question. The points are changed based on how many seconds
-                    are remaining on the timer. The time allowed for the
-                    question is also based on the time remaining along with a
-                    few thresholds. The question asked is the one with the least
-                    amount of points in the queue.
-                </p>
-                <p>Python code I used to test the concept:</p>
-            </div>
-            <Highlight className="python-code" language={"python"}>{code}</Highlight>
-        </>
-    );
-};
-
 export default Info;

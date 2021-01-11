@@ -9,6 +9,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import { useAlert } from 'react-alert';
 
+/**
+ * Component that creates all Question items.
+ * Takes care of edit logic.
+ */
 const QuestionItem = ({ question, id, checkComplete, handleEditQuestions }) => {
     const [onEdit, setOnEdit] = useState(false);
     const [editValue, setEditValue] = useState(question.text);

@@ -2,6 +2,9 @@ import { React, useContext } from 'react'
 import QuestionItem from './QuestionItem'
 import { DataContext } from './DataProvider'
 
+/**
+ * Component that displays inputted questions
+ */
 const QuestionList = () => {
     const [questions, setQuestions] = useContext(DataContext)
 

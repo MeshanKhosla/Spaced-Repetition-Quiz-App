@@ -1,10 +1,15 @@
 import React from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { updateRemainingTime, updateAnswerColor, revertAnswerColor, toggleTimerPlaying, showResultsPage, incrementIncorrectAnswerAmt } from "../actions";
 import { store } from "../index";
 
-const Timer = (props) => {
+/**
+ * Component that creates timers.
+ * Counts question wrong if question timer ends.
+ * Dispatches action to display Results page when quiz timer ends.
+ */
+const Timer = props => {
     const {
         duration,
         key,
@@ -17,10 +22,10 @@ const Timer = (props) => {
         nextQuestion
     } = props;
     
-    const dispatch = useDispatch();
+    // Boolean that determines if the timer should be paused (for delay between questions)
     const timerPlaying = useSelector(state => state.timerPlaying)
-    const quizTimer = useSelector(state => state.quizTimer)
-
+    // Length of quiz timer -- retrieved from localstorage
+    const quizTimer = parseInt(localStorage.getItem("Quiz length"))
     return (
         <>
             <CountdownCircleTimer
@@ -41,14 +46,13 @@ const Timer = (props) => {
                               setCurrentQuestionIndex,
                               setTimerKey,
                               setQuestionTimerDuration,
-                              dispatch
                           )
                         : endQuiz();
                 }}
             >
                 {({ remainingTime }) => {
                     if (isQuestionTimer) {
-                        dispatch(updateRemainingTime(remainingTime));
+                        store.dispatch(updateRemainingTime(remainingTime));
                     }
                     return remainingTime;
                 }}
@@ -57,16 +61,18 @@ const Timer = (props) => {
     );
 };
 
-const handleComplete = async (question, nextQuestion, idx, setCurrentQuestionIndex, setTimerKey, setQuestionTimerDuration, dispatch) => {
+// Logic that handles an incorrect answer
+const handleComplete = async (question, nextQuestion, idx, setCurrentQuestionIndex, setTimerKey, setQuestionTimerDuration) => {
     question.incorrectAnswer(0);
     store.dispatch(updateAnswerColor()) // change right answer to green
     store.dispatch(toggleTimerPlaying())
     store.dispatch(incrementIncorrectAnswerAmt())
 
+    // Delayed so user can see question results
     setTimeout(() => {
         setQuestionTimerDuration(nextQuestion.timeAllowed);
         setCurrentQuestionIndex(idx + 1);
-        setTimerKey(Math.random()); // need to replace this with real timerKey
+        setTimerKey(idx + 1);
         store.dispatch(revertAnswerColor()) // change right answer back to original
         store.dispatch(toggleTimerPlaying())
     }, 1000)

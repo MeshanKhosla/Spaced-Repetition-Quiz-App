@@ -2,6 +2,11 @@ import { React, useState, useContext } from 'react'
 import { DataContext } from './DataProvider';
 import { useAlert } from 'react-alert';
 
+/**
+ * Component that creates Question input.
+ * Ensures there are no duplicate questions.
+ * Updates question array in data provider with new question.
+ */
 const FormInput = () => {
     const [questions, setQuestions] = useContext(DataContext);
     const [questionText, setQuestionText] = useState('');

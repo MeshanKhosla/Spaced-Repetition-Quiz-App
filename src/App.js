@@ -5,21 +5,8 @@ import AddQuestions from './pages/AddQuestions'
 import Quiz from './pages/Quiz'
 import Info from './pages/Info';
 import './App.css';
-/* 
-        Change margin top of quiz-layout based on the number of options
-        Make it so questions with no options are not marked wrong
-            redux state: noOptions
-            If it's true, don't call incorrectAnswer
-        Change width and height on navbar so you can click anywhere in that area
-            instead of just on the text.
 
-    Cleanup:
-    * real timerKey
-    * Move state to redux
-    * Javadocs
-*/
-function App() {
-    
+const App = () => {
     return (
         <Router>
             <div className="App">
