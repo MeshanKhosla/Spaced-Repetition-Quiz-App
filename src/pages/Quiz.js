@@ -56,7 +56,7 @@ const getData = () => {
         questions.push(new Question(q.text, q.options, q.answer));
     });
     
-    // randomizeArrOrder(questions);
+    randomizeArrOrder(questions);
     return questions;
 };
 
