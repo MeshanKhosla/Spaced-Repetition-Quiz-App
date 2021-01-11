@@ -1,5 +1,5 @@
 import { React } from "react";
-import PriorityQueue from "js-priority-queue";
+import PriorityQueue from 'js-priority-queue';
 import TimerLayout from "./TimerLayout";
 import QuestionLayout from "./QuestionLayout";
 import { useSelector } from "react-redux";

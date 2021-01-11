@@ -24,8 +24,8 @@ const Timer = props => {
     
     // Boolean that determines if the timer should be paused (for delay between questions)
     const timerPlaying = useSelector(state => state.timerPlaying)
-    // Length of quiz timer -- retrieved from localstorage
-    const quizTimer = parseInt(localStorage.getItem("Quiz length"))
+    // Length of quiz timer -- retrieved from localstorage; default is 80
+    const quizTimer = parseInt(localStorage.getItem("Quiz length")) || 180
     return (
         <>
             <CountdownCircleTimer
